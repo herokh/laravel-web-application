@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Article;
-use App\Models\Comment;
+// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Listing;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -15,28 +17,30 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
-        // for ($i = 1; $i < 10; $i++) {
-        //     $num = strval($i);
-        //     $a = new Article([
-        //         'name' => 'Article ' . $num,
-        //         'description' => 'test test test test test test test test test test test test ',
-        //         'created_by' => 'hero',
-        //         'updated_by' => 'hero'
-        //     ]);
-        //     $a->save();
-        // }
+        // \App\Models\User::factory(5)->create();
 
-        $a = Article::all()->first();
+        $user = User::factory()->create([
+            'name'  =>  'Hero',
+            'email' =>  'hero@gmail.com'
+        ]);
 
-        for ($i = 1; $i < 10; $i++) {
-            $c = new Comment([
-                'description' => 'test comment',
-                'created_by' => 'hero',
-                'updated_by' => 'hero',
-                'article_id' => $a->id
-            ]);
-            $c->save();
-        }
+        // \App\Models\User::factory()->create([
+        //     'name' => 'Test User',
+        //     'email' => 'test@example.com',
+        // ]);
+
+        Listing::factory(6)->create([
+            'user_id'   =>  $user->id
+        ]);
+
+        // Listing::create([
+        //     'title' => 'Laravel developer',
+        //     'tags'  =>  'test',
+        //     'company'   =>  'test',
+        //     'location'   =>  'test',
+        //     'email'   =>  'test',
+        //     'website'   =>  'test',
+        //     'description'   =>  'Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores doloribus quaerat explicabo, temporibus quidem neque impedit architecto iusto ipsa voluptate reiciendis et, sunt adipisci veritatis aliquid sapiente repellendus recusandae magni.',
+        // ]);
     }
 }
